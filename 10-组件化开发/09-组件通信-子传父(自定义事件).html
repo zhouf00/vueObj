@@ -5,51 +5,59 @@
   <title>Title</title>
 </head>
 <body>
+  <!-- 父组件模板 -->
   <div id="app">
 
-    <cpn :cinfo="info" :child-my-message="message"></cpn>
+    <cpn @itemclick='cpnClick'></cpn>
   </div>
+  <!-- 子组件模板 -->
   <template id="cpn">
     <div>
-      <h2>{{cinfo}}</h2>
-      <p>{{childMyMessage}}</p>
+       <button v-for="item in categories" 
+       @click='btnClick(item)'>
+         {{item.name}}
+       </button>
      </div>
   </template>
   <script src="../js/vue.js"></script>
   <script>
 
-    //2. 注册组件(全局组件)
+    // 子组件
     const cpn = {
       template: '#cpn',
-      props: {
-        cinfo:{
-          type: Object,
-          default() {
-            return {}
+        data(){
+          return {
+            categories:[
+              {id:'aaa', name:'热门推荐'},
+              {id:'bbb', name:'手机数码'},
+              {id:'ccc', name:'家用家电'},
+              {id:'ddd', name:'电脑公办'},
+              {id:'eee', name:'计生情趣'},
+            ]
           }
         },
-        childMyMessage:{
-          type: String,
-          default: 'info'
+        methods: {
+          btnClick(item){
+            // console.log(item);
+            // 发射事件
+            this.$emit('itemclick', item)
+          }
         }
-      },
-      data() {
-        return {}
-      }
     };
-
+    // 父组件
     const app = new Vue({
       el: '#app',
       data: {
-        info:{
-          name:'why',
-          age:18,
-          height:1.88
-        },
-        message:'hahahahahahaha'
+        
       },
       components: {
         cpn
+      },
+      methods:{
+        cpnClick(item){
+          console.log('cpnClick', item.name);
+          
+        }
       }
     })
   </script>
