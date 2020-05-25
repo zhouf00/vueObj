@@ -3,11 +3,14 @@
      <router-link to="/home" tag='button' replace>首页</router-link>
      <router-link to="/about" tag='button' replace>关于</router-link>
      <router-link :to="'/user/' + userid" tag='button' replace>用户</router-link>
+     <router-link :to="{path: '/profile', query:{name:'why', age:'18'}}" tag='button'>档案</router-link>
      <!-- <button @click="homeClick">首页</button>
      <button @click="aboutClick">关于</button> -->
-     <router-view></router-view>
+     <keep-alive exclude="Profile">
+       <router-view/>
+     </keep-alive>
     <!-- <img src="./assets/logo.png"> -->
-    <!-- <router-view/> -->
+    
   </div>
 </template>
 
