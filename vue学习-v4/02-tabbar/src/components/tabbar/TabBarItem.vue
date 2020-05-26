@@ -1,8 +1,9 @@
 <!--  -->
 <template>
   <div class="tab-bar-item">
-    <slot name='item-icon'></slot>
-    <slot name='item-text'></slot>
+    <div v-if="!isActive"><slot name='item-icon'></slot></div>
+    <div v-else><slot name='item-icon-active'></slot></div>
+    <div :class="{active:isActive}"><slot name='item-text'></slot></div>
     <!-- <img src="../../assets/img/tabbar/home.svg" alt="">
     <div>首页</div> -->
   </div>
@@ -19,7 +20,7 @@
     data() {
       //这里存放数据
       return {
-        
+        isActive:true,
       };
     },
     //监听属性 类似于data概念
@@ -60,5 +61,8 @@
     margin-top:3px;
     vertical-align: middle;
     margin-bottom: 2px;
+  }
+  .active {
+    color: #d81e06;
   }
 </style>
