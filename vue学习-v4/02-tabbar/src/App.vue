@@ -1,43 +1,21 @@
 <!-- app组件 -->
 <template>
   <div id='app'>
-    <tab-bar>
-      <tab-bar-item>
-        <img slot="item-icon" src="./assets/img/tabbar/home.svg" alt="">
-        <img slot="item-icon-active" src="./assets/img/tabbar/home_active.svg" alt="">
-        <div slot="item-text">首页</div>
-      </tab-bar-item>
-      <tab-bar-item>
-        <img slot="item-icon" src="./assets/img/tabbar/category.svg" alt="">
-        <img slot="item-icon-active" src="./assets/img/tabbar/category_active.svg" alt="">
-        <div slot="item-text">分类</div>
-      </tab-bar-item>
-      <tab-bar-item>
-        <img slot="item-icon" src="./assets/img/tabbar/shop-cart-2.svg" alt="">
-        <img slot="item-icon-active" src="./assets/img/tabbar/shop-cart-2_active.svg" alt="">
-        <div slot="item-text">购物车</div>
-      </tab-bar-item>
-      <tab-bar-item>
-        <img slot="item-icon" src="./assets/img/tabbar/profile.svg" alt="">
-        <img slot="item-icon-active" src="./assets/img/tabbar/profile_active.svg" alt="">
-        <div slot="item-text">我的</div>
-      </tab-bar-item>
-    </tab-bar>
+    <router-view></router-view>
+    <main-tab-bar/>
   </div>
 </template>
 
 <script>
   //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
   //例如：import 《组件名称》 from '《组件路径》';
-  import TabBar from './components/tabbar/TabBar'
-  import TabBarItem from './components/tabbar/TabBarItem'
+  import MainTabBar from './components/MainTabBar'
 
   export default {
     name: 'App',
     //import引入的组件需要注入到对象中才能使用
     components: {
-      TabBar,
-      TabBarItem
+      MainTabBar
     },
     data() {
       //这里存放数据

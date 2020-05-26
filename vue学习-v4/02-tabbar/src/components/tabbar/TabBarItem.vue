@@ -1,9 +1,9 @@
 <!--  -->
 <template>
-  <div class="tab-bar-item">
+  <div class="tab-bar-item" @click="itemClick">
     <div v-if="!isActive"><slot name='item-icon'></slot></div>
     <div v-else><slot name='item-icon-active'></slot></div>
-    <div :class="{active:isActive}"><slot name='item-text'></slot></div>
+    <div :style="activeStyle"><slot name='item-text'></slot></div>
     <!-- <img src="../../assets/img/tabbar/home.svg" alt="">
     <div>首页</div> -->
   </div>
@@ -20,16 +20,36 @@
     data() {
       //这里存放数据
       return {
-        isActive:true,
+
       };
     },
     //监听属性 类似于data概念
-    computed: {},
+    computed: {
+      isActive () {
+        // 动态决定是否活跃
+        return this.$route.path.indexOf(this.path) !== -1
+      },
+      activeStyle () {
+        return this.isActive ? {color: this.activeColor} : {}
+      }
+    },
     //监控data中的数据变化
     watch: {},
+    props: {
+      path: String,
+      activeColor: {
+        type: String,
+        default: '#d81e06'
+      }
+    },
     //方法集合
     methods: {
-    
+      itemClick () {
+        this.$router.replace(this.path)
+        // console.log(this.$route.path)
+        
+        
+      }
     },
     //生命周期 - 创建完成（可以访问当前this实例）
     created() {
@@ -62,7 +82,5 @@
     vertical-align: middle;
     margin-bottom: 2px;
   }
-  .active {
-    color: #d81e06;
-  }
+
 </style>
