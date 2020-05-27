@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    // 1.使用setTimeout
+    setTimeout (() => {
+      console.log('hello world');
+      
+    }, 1000 )
+    // 参数 -> 函数
+    // resolve, rejcet本身也是函数
+    // 链式编程
+    new Promise( (resolve, reject) => {
+      setTimeout (() => {        
+        resolve()  
+      },1000) 
+    }).then(() => {
+      // 第一次返回结果
+      console.log('hello world');
+      console.log('hello world');
+      console.log('hello world');
+      console.log('hello world');
+      
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // 第二次发送请求
+          resolve()
+        }, 1000)
+      })
+    }).then(() => {
+      // 第二次返回结果
+      console.log('hello vue');
+      console.log('hello vue');
+      console.log('hello vue');
+      console.log('hello vue');
+    })
+
+    // 什么情况下会用到Promise？一般情况下有异步操作进行封装
+    // new -> 构造函数（1.保存一些状态信息 2.执行传入的函数）
+    new Promise((resolve, reject) => {
+      // resolve('hello wallie')
+      reject('error message')
+    }).then((data) => {
+      console.log(data);
+      
+    }).catch((err) => {
+      console.log(err);
+      
+    })
+  </script>
+</body>
+</html>
